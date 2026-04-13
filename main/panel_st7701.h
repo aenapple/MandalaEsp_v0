@@ -1,7 +1,7 @@
 #pragma once
 #include "esp_lcd_panel_ops.h"
 #include "esp_lcd_panel_io.h"
-#include "esp_lcd_rgb_panel.h"
+#include "esp_lcd_panel_rgb.h"
 
 #ifdef __cplusplus
 extern "C" {

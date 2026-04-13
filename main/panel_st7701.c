@@ -2,6 +2,8 @@
 #include "driver/spi_master.h"
 #include "driver/gpio.h"
 #include "esp_log.h"
+#include "freertos/FreeRTOS.h"
+#include "freertos/task.h"
 
 static const char *TAG = "ST7701";
 
@@ -84,7 +86,6 @@ esp_lcd_panel_handle_t panel_st7701_init(void)
 
     esp_lcd_rgb_panel_config_t rgb_cfg = {
         .data_width = 16,
-        .psram_trans_align = 64,
         .num_fbs = 1,
         .clk_src = LCD_CLK_SRC_PLL160M,
         .timings = {
@@ -104,13 +105,31 @@ esp_lcd_panel_handle_t panel_st7701_init(void)
                 .pclk_active_neg = 1,
             },
         },
-        .gpio = {
-            .pclk = PIN_NUM_PCLK,
-            .de = PIN_NUM_DE,
-            .vsync = PIN_NUM_VSYNC,
-            .hsync = PIN_NUM_HSYNC,
-            .data = rgb_pins,
-        },
+		.hsync_gpio_num = PIN_NUM_HSYNC,
+		.vsync_gpio_num = PIN_NUM_VSYNC,
+		.de_gpio_num = PIN_NUM_DE,
+//		.disp_gpio_num = PIN_NUM_DE, // aen need define
+		.pclk_gpio_num = PIN_NUM_PCLK,
+		.data_gpio_nums = {
+			rgb_pins[0],
+			rgb_pins[1],
+			rgb_pins[2],
+			rgb_pins[3],
+			rgb_pins[4],
+			rgb_pins[5],
+			rgb_pins[6],
+			rgb_pins[7],
+			rgb_pins[8],
+			rgb_pins[9],
+			rgb_pins[10],
+			rgb_pins[11],
+			rgb_pins[12],
+			rgb_pins[13],
+			rgb_pins[14],
+			rgb_pins[15],
+			rgb_pins[16],
+			rgb_pins[17]
+		},
         .flags = {
             .fb_in_psram = 1,
         },

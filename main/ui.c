@@ -1,6 +1,8 @@
 #include "ui.h"
 #include <dirent.h>
 #include <string.h>
+#include <stdio.h>
+
 
 static lv_obj_t *img_obj;
 static char image_files[32][128];
@@ -48,8 +50,8 @@ static void scan_folder(const char *path)
     {
         if (strstr(ent->d_name, ".png") || strstr(ent->d_name, ".jpg"))
         {
-            snprintf(image_files[image_count], sizeof(image_files[image_count]),
-                     "%s/%s", path, ent->d_name);
+//   aen         snprintf(image_files[image_count], sizeof(image_files[image_count]),
+//   aen                  "%s/%s", path, ent->d_name);
             image_count++;
             if (image_count >= 32) break;
         }
